@@ -94,6 +94,7 @@ class Home extends Component {
               productList.map(({ title, id, thumbnail, price }) => (
                 <ProductList
                   key={ id }
+                  id={ id }
                   title={ title }
                   thumbnail={ thumbnail }
                   price={ price }
