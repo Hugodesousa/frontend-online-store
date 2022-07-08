@@ -5,10 +5,14 @@ class ProductList extends Component {
   render() {
     const { price, thumbnail, title } = this.props;
     return (
-      <div data-testid="product">
-        <h3>{title}</h3>
-        <img src={ thumbnail } alt={ title } />
-        <p>{price}</p>
+      <div className="product" data-testid="product">
+        <img className="product-image" src={ thumbnail } alt={ title } />
+        <p>
+          R$
+          {' '}
+          {price}
+        </p>
+        <h3 className="product-title">{title}</h3>
       </div>
     );
   }
