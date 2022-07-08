@@ -67,7 +67,7 @@ class Home extends Component {
           >
             Pesquisar
           </button>
-          <Link data-testid="shopping-cart-button" to="/cart">
+          <Link to="/cart">
             <img id="cart" alt="cart" src={ shopping } />
           </Link>
         </div>
