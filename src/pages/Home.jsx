@@ -30,13 +30,21 @@ class Home extends Component {
     this.setState({ productInput: value });
   }
 
-  handleCLick = async () => {
+  handleCLick = async (id) => {
     const { productInput } = this.state;
-    const response = await getProductsFromCategoryAndQuery(undefined, productInput);
-    this.setState({
-      productInput: '',
-      productList: response.results,
-    });
+    if (id) {
+      const response = await getProductsFromCategoryAndQuery(id, undefined);
+      this.setState({
+        productInput: '',
+        productList: response.results,
+      });
+    } else {
+      const response = await getProductsFromCategoryAndQuery(undefined, productInput);
+      this.setState({
+        productInput: '',
+        productList: response.results,
+      });
+    }
   }
 
   render() {
@@ -75,6 +83,7 @@ class Home extends Component {
                 type="button"
                 value={ name }
                 key={ id }
+                onClick={ () => this.handleCLick(id) }
               >
                 { name }
               </button>
