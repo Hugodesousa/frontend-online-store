@@ -32,14 +32,14 @@ class Home extends Component {
 
   handleCLick = async (id) => {
     const { productInput } = this.state;
-    if (id) {
-      const response = await getProductsFromCategoryAndQuery(id, undefined);
+    if (productInput) {
+      const response = await getProductsFromCategoryAndQuery(undefined, productInput);
       this.setState({
         productInput: '',
         productList: response.results,
       });
     } else {
-      const response = await getProductsFromCategoryAndQuery(undefined, productInput);
+      const response = await getProductsFromCategoryAndQuery(id, undefined);
       this.setState({
         productInput: '',
         productList: response.results,
@@ -94,6 +94,7 @@ class Home extends Component {
               productList.map(({ title, id, thumbnail, price }) => (
                 <ProductList
                   key={ id }
+                  id={ id }
                   title={ title }
                   thumbnail={ thumbnail }
                   price={ price }
