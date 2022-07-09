@@ -1,42 +1,36 @@
 import React, { Component } from 'react';
+import { getDetailProduct } from '../services/api';
 
 class Cart extends Component {
   constructor() {
     super();
 
-    this.state = { arrayOfProducts: localStorage.getItem('cartArray')
-      ? JSON.parse(localStorage.getItem('cartArray')) : [] };
+    this.state = { arrayOfIds: [] };
   }
 
   componentDidMount() {
-    // this.getProducts();
+    this.getProductsFromStorage();
   }
 
-  getProducts = () => {
-    // for (let index = 0; index < localStorage.length; index += 1) {
-    //   const response = JSON.parse(localStorage.getItem(localStorage.key(index)));
-    //   this.setState((prev) => ({
-    //     arrayOfProducts: [...prev.arrayOfProducts, response],
-    //   }));
-    // }
-
-    // const response = JSON.parse(localStorage.getItem('cartArray'));
-
-    // console.log(response);
-
-    // this.setState({
-    //   arrayOfProducts: response,
-    // });
-    // const { arrayOfProducts } = this.state;
-    // console.log(arrayOfProducts);
+  getProductsFromStorage = async () => {
+    const data = JSON.parse(localStorage.getItem('cartArray'));
+    if (data) {
+      const test = data.map((id) => getDetailProduct(id));
+      const array = await Promise.all(test);
+      this.setState({
+        arrayOfIds: array,
+      });
+    }
+    // const request = await getDetailProduct()
+    // console.log('test');
   }
 
   render() {
-    const { arrayOfProducts } = this.state;
+    const { arrayOfIds } = this.state;
 
-    console.log('a>>', arrayOfProducts);
+    // console.log('a>>', arrayOfIds);
 
-    if (!arrayOfProducts.length) {
+    if (!arrayOfIds.length) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       );
@@ -44,7 +38,7 @@ class Cart extends Component {
 
     return (
       <>
-        { arrayOfProducts.map(({ product, quantity }) => {
+        { arrayOfIds.map((product) => {
           const { title, id, thumbnail, price } = product;
           return (
             <div key={ id }>
@@ -55,7 +49,7 @@ class Cart extends Component {
                 {price}
               </p>
               <h3 data-testid="shopping-cart-product-name">{title}</h3>
-              <p data-testid="shopping-cart-product-quantity">{quantity}</p>
+              <p data-testid="shopping-cart-product-quantity">1</p>
             </div>
           );
         })}
