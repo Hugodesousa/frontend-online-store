@@ -36,7 +36,7 @@ class Cart extends Component {
 
     console.log('a>>', arrayOfProducts);
 
-    if (!arrayOfProducts) {
+    if (!arrayOfProducts.length) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       );

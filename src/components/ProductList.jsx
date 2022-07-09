@@ -6,7 +6,6 @@ import { getDetailProduct } from '../services/api';
 class ProductList extends Component {
   addToCart = async (id) => {
     const product = await getDetailProduct(id);
-
     const cart = JSON.parse(localStorage.getItem('cartArray'));
 
     const itemInCart = cart?.find((cartItem) => cartItem.product.id === id);
@@ -34,7 +33,6 @@ class ProductList extends Component {
 
   render() {
     const { price, thumbnail, title, id } = this.props;
-    // console.log(cartArray);
     return (
       <div className="product" data-testid="product">
         <Link data-testid="product-detail-link" to={ `/details/${id}` }>
