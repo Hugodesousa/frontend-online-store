@@ -5,7 +5,10 @@ class Cart extends Component {
   constructor() {
     super();
 
-    this.state = { arrayOfIds: [] };
+    this.state = {
+      arrayOfIds: [],
+      quantity: 1,
+    };
   }
 
   componentDidMount() {
@@ -25,10 +28,22 @@ class Cart extends Component {
     // console.log('test');
   }
 
-  render() {
-    const { arrayOfIds } = this.state;
+  decreaseQuantity = () => {
+    const { quantity } = this.state;
+    const newQuantity = quantity - 1;
+    this.setState({ quantity: newQuantity });
+  };
 
-    // console.log('a>>', arrayOfIds);
+  increaseQuantity = () => {
+    const { quantity } = this.state;
+    const newQuantity = quantity + 1;
+    this.setState({ quantity: newQuantity });
+  };
+
+  render() {
+    const { arrayOfIds, quantity } = this.state;
+
+    console.log('a>>', arrayOfIds);
 
     if (!arrayOfIds.length) {
       return (
@@ -43,13 +58,27 @@ class Cart extends Component {
           return (
             <div key={ id }>
               <img className="product-image" src={ thumbnail } alt={ title } />
+              <button
+                type="button"
+                data-testid="product-decrease-quantity"
+                onClick={ this.decreaseQuantity }
+              >
+                -
+              </button>
+              <button
+                type="button"
+                data-testid="product-increase-quantity"
+                onClick={ this.increaseQuantity }
+              >
+                +
+              </button>
               <p>
                 R$
                 {' '}
                 {price}
               </p>
               <h3 data-testid="shopping-cart-product-name">{title}</h3>
-              <p data-testid="shopping-cart-product-quantity">1</p>
+              <p data-testid="shopping-cart-product-quantity">{quantity}</p>
             </div>
           );
         })}

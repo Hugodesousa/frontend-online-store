@@ -5,7 +5,6 @@ export default function addToCart(id) {
   }
   const cart = JSON.parse(localStorage.getItem('cartArray'));
   const newArray = [...cart, id];
-  console.log(newArray);
   return localStorage.setItem('cartArray', JSON.stringify(newArray));
 
   // const cart = JSON.parse(localStorage.getItem('cartArray'));

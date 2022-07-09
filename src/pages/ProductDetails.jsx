@@ -30,8 +30,6 @@ class ProductDetails extends Component {
 
   render() {
     const { product: { title, thumbnail, price, id } } = this.state;
-    const { product } = this.state;
-    console.log(product);
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cart">
