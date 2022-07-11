@@ -71,7 +71,7 @@ class Home extends Component {
             <img id="cart" alt="cart" src={ shopping } />
           </Link>
         </div>
-        <h2 data-testid="home-initial-message">
+        <h2 data-testid="home-initial-message" className="subtitle">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <div className="products-section">
