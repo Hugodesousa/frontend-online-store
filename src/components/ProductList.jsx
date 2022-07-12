@@ -42,7 +42,8 @@ class ProductList extends Component {
   // }
 
   render() {
-    const { price, thumbnail, title, id } = this.props;
+    const { productObj } = this.props;
+    const { price, thumbnail, title, id } = productObj;
     return (
       <div className="product" data-testid="product">
         <Link data-testid="product-detail-link" to={ `/details/${id}` }>
@@ -57,7 +58,7 @@ class ProductList extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => addToCart(id) }
+          onClick={ () => addToCart(productObj) }
         >
           Adicionar ao carrinho
         </button>

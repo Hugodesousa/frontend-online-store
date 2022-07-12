@@ -69,8 +69,8 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { product: { title, thumbnail, price, id },
-      emailUser, evaluationText } = this.state;
+    const { product, emailUser, evaluationText } = this.state;
+    const { title, thumbnail, price } = product;
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cart">
@@ -86,7 +86,7 @@ class ProductDetails extends Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => addToCart(id) }
+          onClick={ () => addToCart(product) }
         >
           Adicionar ao carrinho
         </button>
