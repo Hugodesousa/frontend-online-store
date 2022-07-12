@@ -1,10 +1,9 @@
-export default function addToCart(id) {
-  // const product = await getDetailProduct(id);
+export default function addToCart(productObj) {
   if (!localStorage.getItem('cartArray')) {
     localStorage.setItem('cartArray', '[]');
   }
   const cart = JSON.parse(localStorage.getItem('cartArray'));
-  const newArray = [...cart, id];
+  const newArray = [...cart, productObj];
   return localStorage.setItem('cartArray', JSON.stringify(newArray));
 
   // const cart = JSON.parse(localStorage.getItem('cartArray'));
