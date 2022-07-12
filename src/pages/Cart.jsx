@@ -10,7 +10,6 @@ class Cart extends Component {
 
     this.state = {
       arrayOfIds: [],
-      // quantity: 1,
     };
   }
 
@@ -22,7 +21,6 @@ class Cart extends Component {
    const data = JSON.parse(localStorage.getItem('cartArray'));
    if (data) {
      data.forEach((object) => { object.quantity = 1; });
-     // const array = await Promise.all(test);
      this.setState({
        arrayOfIds: data,
      });
@@ -60,8 +58,6 @@ class Cart extends Component {
 
  render() {
    const { arrayOfIds } = this.state;
-
-   // console.log(arrayOfIds);
 
    if (!arrayOfIds.length) {
      return (
@@ -114,6 +110,7 @@ class Cart extends Component {
            );
          })}
        </div>
+       <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
      </div>
    );
  }
