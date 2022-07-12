@@ -13,6 +13,10 @@ class ProductDetails extends Component {
     console.log(id);
 
     this.state = {
+      emailUser: '',
+      // saveEmailUser: '',
+      evaluationText: '',
+      // saveEvaluationText: '',
       productID: id,
       product: {},
     };
@@ -28,8 +32,45 @@ class ProductDetails extends Component {
     this.setState({ product: response });
   }
 
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  publishReview = () => {
+    const { evaluationText, emailUser } = this.state;
+    this.setState({
+      // saveEvaluationText: evaluationText,
+      // saveEmailUser: emailUser,
+      emailUser: '',
+      evaluationText: '',
+    });
+
+    localStorage.setItem('user-email', emailUser);
+    localStorage.setItem('evaluation-text', evaluationText);
+  }
+
+  verifyLocalStorage = () => {
+    const email = localStorage.getItem('user-email');
+    const text = localStorage.getItem('evaluation-text');
+
+    if (email && text) {
+      return (
+        <div>
+          <p>{email}</p>
+          <p>{text}</p>
+        </div>
+      );
+    }
+
+    return null;
+  }
+
   render() {
-    const { product: { title, thumbnail, price, id } } = this.state;
+    const { product: { title, thumbnail, price, id },
+      emailUser, evaluationText } = this.state;
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cart">
@@ -49,6 +90,76 @@ class ProductDetails extends Component {
         >
           Adicionar ao carrinho
         </button>
+
+        <div>
+          <label htmlFor="input-email">
+            <input
+              value={ emailUser }
+              name="emailUser"
+              onChange={ this.handleChange }
+              id="input-email"
+              type="email"
+              data-testid="product-detail-email"
+            />
+          </label>
+
+          <div onChange={ this.handleChange }>
+            1
+            <input
+              id="1"
+              type="radio"
+              data-testid="1-rating"
+            />
+
+            2
+            <input
+              id="2"
+              type="radio"
+              data-testid="2-rating"
+            />
+
+            3
+            <input
+              id="3"
+              type="radio"
+              data-testid="3-rating"
+            />
+
+            4
+            <input
+              id="4"
+              type="radio"
+              data-testid="4-rating"
+            />
+
+            5
+            <input
+              id="5"
+              type="radio"
+              data-testid="5-rating"
+            />
+          </div>
+        </div>
+
+        <label htmlFor="evaluation">
+          <input
+            value={ evaluationText }
+            name="evaluationText"
+            onChange={ this.handleChange }
+            id="evaluation"
+            data-testid="product-detail-evaluation"
+            type="text"
+          />
+        </label>
+        <button
+          onClick={ this.publishReview }
+          type="button"
+          data-testid="submit-review-btn"
+        >
+          Enviar
+        </button>
+
+        { this.verifyLocalStorage() }
       </div>
     );
   }
