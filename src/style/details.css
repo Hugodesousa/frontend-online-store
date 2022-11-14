@@ -1,0 +1,32 @@
+.detailsContainer {
+  background-color: #3d5a80;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.photoTile {
+  display: flex;
+  margin: 3rem 3rem 5rem;
+}
+
+.photoTile img {
+  border-radius: 1.5rem;
+  margin-right: 3rem;
+}
+
+.formContainer {
+  align-self: flex-start;
+  background-color: #5f7a9d;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: 3rem;
+  padding: 1.5rem;
+}
+
+.formItem {
+  margin: 1rem;
+  padding: 0.5rem;
+}
